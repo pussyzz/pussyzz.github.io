@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Fake Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <style>
+        :root {
+            --fb-blue: #0866ff;
+            --fb-dark-bg: #18191a;
+            --fb-card-bg: #242526;
+            --fb-text: #e4e6eb;
+            --fb-subtext: #b0b3b8;
+            --fb-button-gray: #3a3b3c;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            background-color: var(--fb-dark-bg);
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('1293106.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            justify-content: center;  
+            align-items: center;
+            margin: 0;
+            font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        /* --- CSS GIỮ NGUYÊN TỪ BẢN TRƯỚC --- */
+        .fb-card { width: 380px; background: var(--fb-card-bg); border-radius: 12px; overflow: hidden; box-shadow: 0 12px 28px rgba(0,0,0,0.5); position: relative; }
+        .cover-photo { width: 100%; height: 160px; background-image: url('https://i.ibb.co/Q7T2Qpb1/IMG-20260214-225839.jpg'); background-size: cover; background-position: center; position: relative; z-index: 1; }
+        .profile-container { display: flex; flex-direction: column; align-items: center; padding: 0 16px 15px 16px; margin-top: -75px; position: relative; z-index: 2; }
+        .avatar-box { position: relative;display: inline-block;cursor: pointer;padding: 3px; background: #0866ff; border-radius: 50%;transition: transform 0.2s; }
+        .avt { width: 130px;height: 130px;border-radius: 50%;object-fit: cover;display: block;border: 3px solid var(--fb-card-bg); background: #222; }
+.avatar-box:active {
+    transform: scale(0.95); /* Hiệu ứng nhấn vào avatar */
+}
+
+/* Chỉnh lại chấm xanh online cho khớp viền mới */
+.online-dot {
+    width: 22px;
+    height: 22px;
+    background: #31a24c;
+    border: 4px solid var(--fb-card-bg);
+    border-radius: 50%;
+    position: absolute;
+    bottom: 8px; /* Chỉnh lại vị trí cho sát viền */
+    right: 8px;
+    z-index: 3;
+}
+        .name-wrapper { display: flex; align-items: center; gap: 6px; margin-top: 10px; }
+        h2 { font-size: 24px; font-weight: 700; margin: 0; color: var(--fb-text); }
+        .verify-img { width: 20px; height: 20px; object-fit: contain; }
+        .stats { font-size: 14px; color: var(--fb-subtext); margin: 6px 0 12px 0; }
+        .intro { font-size: 15px; color: var(--fb-text); text-align: center; margin-bottom: 15px; }
+        .btn-group { display: flex; width: 100%; gap: 8px; margin-bottom: 10px; }
+        .btn { flex: 1; padding: 8px 0; border-radius: 6px; border: none; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 14px; }
+        .btn-blue { background: var(--fb-blue); color: #fff; }
+        .btn-gray { background: var(--fb-button-gray); color: #fff; }
+        .fb-nav { display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #3e4042; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--fb-subtext); text-decoration: none; flex: 1; cursor: pointer; }
+        .nav-item.active { color: var(--fb-blue); }
+
+        /* --- STORY MODAL --- */
+        #storyModal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: #000; flex-direction: column; justify-content: space-between; overflow: hidden; }
+        .story-header { padding: 15px; display: flex; align-items: center; background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent); color: white; z-index: 10; }
+        .story-header img { width: 40px; height: 40px; border-radius: 50%; margin-right: 10px; border: 2px solid var(--fb-blue); }
+        .story-header .user-info { flex: 1; }
+        .story-header .user-info div { font-weight: bold; font-size: 14px; }
+        .story-header .user-info span { font-size: 12px; opacity: 0.7; }
+        .story-content { flex: 1; display: flex; justify-content: center; align-items: center; position: relative;max-height: 75vh; overflow: hidden;}
+        #storyVideo { max-height: 100%; max-width: 100%; }
+        .story-footer { padding: 15px; display: flex; align-items: center; gap: 10px; background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); z-index: 10; }
+        .story-input { flex: 1; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3); border-radius: 20px; padding: 8px 15px; color: white; font-size: 14px; }
+        .story-reactions { display: flex; gap: 12px; position: relative; }
+        .reaction-icon { font-size: 26px; cursor: pointer; transition: transform 0.1s; z-index: 11; }
+        .reaction-icon:active { transform: scale(1.5); }
+
+        /* --- HIỆU ỨNG ICON BAY (FLOATING ANIMATION) --- */
+        .floating-reaction {
+            position: absolute;
+            bottom: 60px; /* Xuất phát từ khu vực footer */
+            font-size: 30px;
+            pointer-events: none;
+            z-index: 100;
+            animation: flyUp 2s ease-out forwards;
+        }
+
+        @keyframes flyUp {
+            0% {
+                transform: translateY(0) translateX(0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-500px) translateX(var(--random-x)) scale(1.5);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="fb-card">
+        <div class="cover-photo"></div>
+        <div class="profile-container">
+            <div class="avatar-box" onclick="openStory()">
+                <img src="avt.png" alt="avatar" class="avt">
+                <div class="online-dot"></div>
+            </div>
+            <div class="name-wrapper">
+                <h2>Xau Trai Dep Trai</h2>
+                <img src="https://i.ibb.co/WNZWCZvT/tickxanh.png" class="verify-img" alt="tick">
+            </div>
+            <div class="stats"><b>102</b> triệu người theo dõi • <b>2</b> đang theo dõi</div>
+            <p class="intro">Xin chào tôi là nguyen thanhle và là một người đam mê code.</p>
+            <div class="btn-group">
+                <button id="followBtn" class="btn btn-blue" onclick="handleFollow()"><i class="fas fa-user-plus"></i> <span>Theo dõi</span></button>
+                <button class="btn btn-gray"><i class="fab fa-facebook-messenger"></i> Nhắn tin</button>
+            </div>
+        </div>
+        <div class="fb-nav">
+            <a onclick="changeTab(this)" class="nav-item active"><i class="fas fa-home"></i><span>Trang chủ</span></a>
+            <a onclick="changeTab(this)" class="nav-item"><i class="fas fa-user-friends"></i><span>Bạn bè</span></a>
+            <a onclick="changeTab(this)" class="nav-item"><i class="fas fa-bell"></i><span>Thông báo</span></a>
+            <a onclick="changeTab(this)" class="nav-item"><i class="fas fa-bars"></i><span>Menu</span></a>
+        </div>
+    </div>
+
+    <div id="storyModal">
+        <div class="story-header">
+            <img src="avt.png" alt="avt">
+            <div class="user-info">
+                <div>Xau Trai Dep Trai</div>
+                <span>11 giờ</span>
+            </div>
+            <i class="fas fa-ellipsis-h" style="margin-right: 20px;"></i>
+            <i class="fas fa-times" onclick="closeStory()" style="font-size: 24px; cursor: pointer;"></i>
+        </div>
+
+        <div class="story-content" id="storyArea">
+            <video id="storyVideo" loop>
+                <source src="video.mp4" type="video/mp4">
+            </video>
+            </div>
+
+        <div class="story-footer">
+            <div class="story-input">Gửi tin nhắn...</div>
+            <div class="story-reactions">
+                <span class="reaction-icon" onclick="spawnReaction('❤️', this)">❤️</span>
+                <span class="reaction-icon" onclick="spawnReaction('🖕', this)">🖕</span>
+                <span class="reaction-icon" onclick="spawnReaction('😂', this)">😂</span>
+                <span class="reaction-icon" onclick="spawnReaction('😮', this)">😮</span>
+                <span class="reaction-icon" onclick="spawnReaction('😢', this)">😢</span>
+                <span class="reaction-icon" onclick="spawnReaction('😡', this)">😡</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // HÀM TẠO ICON BAY
+        function spawnReaction(emoji, element) {
+    const area = document.getElementById('storyArea');
+    const floatingEmoji = document.createElement('div');
+    
+    floatingEmoji.innerText = emoji;
+    floatingEmoji.className = 'floating-reaction';
+    
+    // Vị trí xuất phát từ icon
+    const rect = element.getBoundingClientRect();
+    floatingEmoji.style.left = (rect.left + (rect.width/2) - 15) + 'px';
+    
+    // Tạo độ lệch và độ xoay ngẫu nhiên
+    const randomX = Math.floor(Math.random() * 160) - 80; 
+    const randomRotate = Math.floor(Math.random() * 60) - 30; // Xoay nhẹ -30 đến 30 độ
+    
+    floatingEmoji.style.setProperty('--random-x', randomX + 'px');
+    floatingEmoji.style.transform = `rotate(${randomRotate}deg)`;
+
+    area.appendChild(floatingEmoji);
+
+    setTimeout(() => {
+        floatingEmoji.remove();
+    }, 2000);
+}
+
+        function openStory() {
+            document.getElementById('storyModal').style.display = 'flex';
+            document.getElementById('storyVideo').play();
+        }
+
+        function closeStory() {
+            document.getElementById('storyModal').style.display = 'none';
+            document.getElementById('storyVideo').pause();
+        }
+
+        function changeTab(element) {
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function handleFollow() {
+            const btn = document.getElementById('followBtn');
+            const icon = btn.querySelector('i');
+            const text = btn.querySelector('span');
+            if (!btn.getAttribute('data-followed')) {
+                btn.setAttribute('data-followed', 'true');
+                icon.className = 'fas fa-user-check';
+                text.innerText = 'Đang theo dõi';
+            } else {
+                btn.removeAttribute('data-followed');
+                icon.className = 'fas fa-user-plus';
+                text.innerText = 'Theo dõi';
+            }
+        }
+    </script>
+</body>
+</html>

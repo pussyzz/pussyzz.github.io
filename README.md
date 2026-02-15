@@ -1,6 +1,27 @@
-# pussyzz.github.io
-html facebook fake !!
-https://pussyzz.github.io
 <p align="center">
   <img src="https://i.ibb.co/7d6Prhyt/3-6-Nero-AI-Image-Upscaler-Photo-Face.jpg" width="100%">
+</p>
+
+<h1 align="center">Hi 👋 I'm 𝗧𝗵𝗮𝗻𝗵 𝕃𝕖</h1>
+
+<p align="center">
+<img src="https://readme-typing-svg.herokuapp.com?size=25&center=true&vCenter=true&width=600&lines=Welcome+to+my+GitHub;Web+Developer;Always+Learning">
+</p>
+
+---
+
+<h3 align="center">🛠 My Stack</h3>
+
+<p align="center">
+<img src="https://skillicons.dev/icons?i=html,css,js,github,vscode,linux,git" />
+</p>
+
+---
+
+<p align="center">
+<img src="https://github-readme-stats.vercel.app/api?username=pussyzz&show_icons=true&theme=tokyonight">
+</p>
+
+<p align="center">
+<img src="https://komarev.com/ghpvc/?username=pussyzz&style=for-the-badge">
 </p>

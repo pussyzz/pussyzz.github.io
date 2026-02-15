@@ -2,10 +2,6 @@
   <img src="https://i.ibb.co/7d6Prhyt/3-6-Nero-AI-Image-Upscaler-Photo-Face.jpg" width="100%">
 </p>
 
-<p align="center">
-<img src="https://readme-typing-svg.herokuapp.com?size=24&center=true&vCenter=true&width=600&lines=Welcome+to+my+GitHub;Learning+Web+Development;Always+Improving...">
-</p>
-
 <h1 align="center">Hi 👋 I'm 𝕋𝕙𝕒𝕟𝕙 𝕃𝕖</h1>
 
 <p align="center">
@@ -13,7 +9,6 @@
 </p>
 
 ---
-
 
 
 <p align="center">

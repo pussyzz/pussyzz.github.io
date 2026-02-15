@@ -10,7 +10,10 @@
 
 ---
 
-
 <p align="center">
   <img src="https://komarev.com/ghpvc/?username=pussyzz&style=for-the-badge" />
+</p>
+
+<p align="center">
+<img src="https://streak-stats.demolab.com?user=pussyzz&theme=tokyonight" />
 </p>
